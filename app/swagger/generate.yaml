@@ -1,0 +1,271 @@
+swagger: "2.0"
+info:
+  description: "Esta es una API para generar respuestas desde un LLM"
+  version: "1.0.0"
+  title: "API de análisis de texto con LLMs"
+
+host: "localhost:5000"
+basePath: "/"
+
+schemes:
+  - "http"
+
+paths:
+  /resumir_reclamos:
+    post:
+      tags:
+        - "modelo"
+      summary: "Resumir reclamos desde el modelo"
+      description: "Este endpoint genera un resumen de los reclamos desde un modelo de lenguaje basado en los parámetros proporcionados. Además, calcula diversas métricas para evaluar la calidad del resumen generado."
+      operationId: "resumir_reclamos"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Parámetros para generar una respuesta"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              prompt:
+                type: "string"
+                description: "El prompt para generar una respuesta."
+                example: "Haz un resumen de los reclamos analizados..."
+              ground_truth:
+                type: "string"
+                description: "El texto de referencia para evaluar las métricas."
+                example: "Análisis Diario de Reclamos..."
+              temperature:
+                type: "number"
+                description: "Temperatura de muestreo."
+                example: 0.7
+              top_k:
+                type: "number"
+                description: "Parámetro de muestreo top-k."
+                example: 50
+              top_p:
+                type: "number"
+                description: "Parámetro de muestreo top-p (nucleus sampling)."
+                example: 0.9
+              repetition_penalty:
+                type: "number"
+                description: "Penalización por repetición."
+                example: 1.0
+              frequency_penalty:
+                type: "number"
+                description: "Penalización por frecuencia."
+                example: 0.0
+              presence_penalty:
+                type: "number"
+                description: "Penalización por presencia."
+                example: 0.0
+              run_name:
+                type: "string"
+                description: "El nombre de la ejecución en MLflow."
+                example: "Test_Run"
+              collection:
+                type: "string"
+                description: "El nombre de la colección en ChromaDB."
+                example: "reclamos"
+      responses:
+        200:
+          description: "Un objeto JSON que contiene la respuesta generada y las métricas"
+          schema:
+            type: "object"
+            properties:
+              response:
+                type: "object"
+                description: "La respuesta generada por el modelo"
+                properties:
+                  response:
+                    type: "string"
+                    description: "El texto generado por el modelo"
+                    example: "Aquí está el resumen de los reclamos..."
+              metrics:
+                type: "object"
+                description: "Las métricas de evaluación de la respuesta"
+                properties:
+                  similarity:
+                    type: "array"
+                    items:
+                      type: "number"
+                    description: "Las puntuaciones de similitud."
+                    example: [0.85, 0.90]
+                  accuracy:
+                    type: "number"
+                    description: "La precisión."
+                    example: 0.8
+                  bleu_score:
+                    type: "number"
+                    description: "La puntuación BLEU."
+                    example: 0.75
+                  rouge1_score:
+                    type: "number"
+                    description: "La puntuación ROUGE-1."
+                    example: 0.80
+                  rougeL_score:
+                    type: "number"
+                    description: "La puntuación ROUGE-L."
+                    example: 0.78
+                  meteor_score:
+                    type: "number"
+                    description: "La puntuación METEOR."
+                    example: 0.70
+        500:
+          description: "Error interno del servidor"
+  /buscar_reclamos_prob:
+    post:
+      tags:
+        - "modelo"
+      summary: "Buscar reclamos según problemática de consumo"
+      description: "Este endpoint genera una búsqueda de reclamos problemáticos desde un modelo de lenguaje basado en los parámetros proporcionados. Además, calcula diversas métricas para evaluar la calidad de la búsqueda generada."
+      operationId: "buscar_reclamos_prob"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Parámetros para generar una respuesta"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              prompt:
+                type: "string"
+                description: "El prompt para generar una respuesta."
+                example: "Buscar reclamos problemáticos..."
+              ground_truth:
+                type: "string"
+                description: "El texto de referencia para evaluar las métricas."
+                example: "Reclamos problemáticos..."
+              temperature:
+                type: "number"
+                description: "Temperatura de muestreo."
+                example: 0.7
+              top_k:
+                type: "number"
+                description: "Parámetro de muestreo top-k."
+                example: 50
+              top_p:
+                type: "number"
+                description: "Parámetro de muestreo top-p (nucleus sampling)."
+                example: 0.9
+              repetition_penalty:
+                type: "number"
+                description: "Penalización por repetición."
+                example: 1.0
+              frequency_penalty:
+                type: "number"
+                description: "Penalización por frecuencia."
+                example: 0.0
+              presence_penalty:
+                type: "number"
+                description: "Penalización por presencia."
+                example: 0.0
+              run_name:
+                type: "string"
+                description: "El nombre de la ejecución en MLflow."
+                example: "Test_Run"
+              collection:
+                type: "string"
+                description: "El nombre de la colección en ChromaDB."
+                example: "reclamos"
+      responses:
+        200:
+          description: "Un objeto JSON que contiene la respuesta generada y las métricas"
+          schema:
+            type: "object"
+            properties:
+              response:
+                type: "object"
+                description: "La respuesta generada por el modelo"
+                properties:
+                  response:
+                    type: "string"
+                    description: "Aquí está la búsqueda de reclamos problemáticos..."
+              metrics:
+                type: "object"
+                description: "Las métricas de evaluación de la respuesta"
+                properties:
+                  similarity:
+                    type: "array"
+                    items:
+                      type: "number"
+                    description: "Las puntuaciones de similitud."
+                    example: [0.85, 0.90]
+                  accuracy:
+                    type: "number"
+                    description: "La precisión."
+                    example: 0.8
+                  bleu_score:
+                    type: "number"
+                    description: "La puntuación BLEU."
+                    example: 0.75
+                  rouge1_score:
+                    type: "number"
+                    description: "La puntuación ROUGE-1."
+                    example: 0.80
+                  rougeL_score:
+                    type: "number"
+                    description: "La puntuación ROUGE-L."
+                    example: 0.78
+                  meteor_score:
+                    type: "number"
+                    description: "La puntuación METEOR."
+                    example: 0.70
+        500:
+          description: "Error interno del servidor"
+  /vectorizar_tabla:
+    post:
+      tags:
+        - "vectorización"
+      summary: "Vectorizar datos desde una tabla en PostgreSQL"
+      description: "Este endpoint vectoriza datos desde una tabla en PostgreSQL y almacena los vectores en ChromaDB."
+      operationId: "vectorizar_tabla"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Parámetros para vectorizar datos"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              table_name:
+                type: "string"
+                description: "Nombre de la tabla en PostgreSQL."
+                example: "nombre_de_la_tabla"
+              metadata_fields:
+                type: "array"
+                items:
+                  type: "string"
+                description: "Lista de campos para guardar como metadata."
+                example: ["CASO_NUMERO", "CASO_FECHA_CREACION", "PROVEEDOR_RUT"]
+              text_field:
+                type: "string"
+                description: "Campo para guardar como texto a vectorizar."
+                example: "RECLAMO_DESCRIPCION"
+              batch_size:
+                type: "number"
+                description: "Tamaño del batch para procesar los datos."
+                example: 100
+      responses:
+        200:
+          description: "Un mensaje de éxito indicando que la vectorización se completó"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                description: "Mensaje de éxito"
+                example: "Vectorización completada"
+        500:
+          description: "Error interno del servidor"
