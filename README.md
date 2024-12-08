@@ -1,6 +1,6 @@
 RAG LegalTech IPS
 
-RAG LegalTech IPS es un sistema basado en Retrieval-Augmented Generation (RAG) diseñado para optimizar la gestión de consultas legales simples en el Instituto de Previsión Social (IPS). Este proyecto combina inteligencia artificial generativa con recuperación de documentos relevantes, proporcionando respuestas rápidas, precisas y contextualizadas en base a datos normativos y administrativos.
+RAG LegalTech  es una propuesta de solución basada en Retrieval-Augmented Generation (RAG) diseñado para optimizar la gestión de consultas legales simples en el Instituto de Previsión Social (IPS). Este proyecto combina inteligencia artificial generativa con recuperación de documentos relevantes, proporcionando respuestas rápidas, precisas y contextualizadas en base a datos normativos y administrativos.
 
 Índice
 	1.	Introducción
@@ -21,10 +21,16 @@ RAG LegalTech IPS es un sistema basado en Retrieval-Augmented Generation (RAG) d
  
 1. Introducción
 
-RAG LegalTech IPS permite:
-	•	Procesar grandes volúmenes de datos normativos.
+RAG LegalTech permite:
+
+	•	Procesar grandes volúmenes de datos normativos y de distinta naturaleza.
+ 
 	•	Generar respuestas relevantes a consultas legales simples.
+ 
+ 	•	Clasificar consultas en base a parámetros personalizables
+  
 	•	Reducir significativamente los tiempos de respuesta en entornos operativos reales.
+ 
 
 Propósito
 
