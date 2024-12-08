@@ -42,7 +42,7 @@ Desarrollado para el Desafío Ley Ágil IPS, este proyecto aborda problemáticas
 	3.	Optimización continua con MLflow.
 	4.	API RESTful escalable y adaptable a sistemas existentes.
 
- 3. Requisitos.
+ 3. Requisitos previos.
 
 	1. Levantar MLflow
 
