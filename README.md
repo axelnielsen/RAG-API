@@ -68,7 +68,13 @@ El sistema está compuesto por los siguientes módulos:
 
 Diagrama de Arquitectura
 
+A grandes rasgos la arquitectura del sistema RAG se compone de los siguientes elementos:
+
 <img width="384" alt="image" src="https://github.com/user-attachments/assets/3431f913-824c-4737-b5af-01ccf6f3ef5d">
+
+Así, para llevar dicha solución a la nube de AWS, los componentes srquitectónicos son los siguientes:
+
+<img width="1196" alt="image" src="https://github.com/user-attachments/assets/32c22f39-2341-497e-8494-d827738bcaef">
 
 5. Endpoints de la API
 
