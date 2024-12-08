@@ -55,32 +55,36 @@ Requisitos previos
 
 Paso a paso
 	1.	Instalar MLflow: pip install mlflow
+ 
  	2.	Crear un directorio de proyecto: mkdir mlflow_project && cd mlflow_project
+  
 	3.	Iniciar el servidor MLflow:
+ 
 		mlflow server \
 		    --backend-store-uri sqlite:///mlflow.db \
 		    --default-artifact-root ./mlruns \
 		    --host 0.0.0.0 \
 		    --port 5000
 
-      	•	--backend-store-uri: URI de la base de datos para almacenar metadatos. En este caso, una base SQLite.
-	•	--default-artifact-root: Carpeta o bucket para almacenar artefactos (modelos, logs, etc.).
+		--backend-store-uri: URI de la base de datos para almacenar metadatos. En este caso, una base SQLite.
+		--default-artifact-root: Carpeta o bucket para almacenar artefactos (modelos, logs, etc.).
 
  	4.	Acceder a la interfaz de usuario:
-Abre un navegador y accede a http://127.0.0.1:5000 para visualizar la interfaz de MLflow.
+  
+Abrir un navegador y acceder a http://127.0.0.1:5000 para visualizar la interfaz de MLflow.
 	5.	Registrar experimentos:
-Dentro de tu script de entrenamiento, agregar:
-import mlflow
+ 
+		Dentro de  script de entrenamiento, agregar:
+  
+		import mlflow
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("nombre_del_experimento")
-
-with mlflow.start_run():
-    mlflow.log_param("parametro", valor)
-    mlflow.log_metric("metrica", valor)
-    mlflow.log_artifact("ruta_al_archivo")
-
-
+		mlflow.set_tracking_uri("http://127.0.0.1:5000")
+		mlflow.set_experiment("nombre_del_experimento")
+		
+		with mlflow.start_run():
+		    mlflow.log_param("parametro", valor)
+		    mlflow.log_metric("metrica", valor)
+		    mlflow.log_artifact("ruta_al_archivo")
 
 2. Configurar y correr Ollama para Llama3
 
@@ -91,25 +95,26 @@ Requisitos previos
 
 Paso a paso
 	1.	Instalar Ollama:
-	•	En sistemas compatibles, instala Ollama con: brew install ollama
- 	2.	Iniciar Ollama Server: ollama serve
-  	3.	Descargar Llama3: ollama chat llama3
+	2.	En sistemas compatibles, instala Ollama con: brew install ollama
+ 	3.	Iniciar Ollama Server: ollama serve
+  	4.	Descargar Llama3: ollama chat llama3
 	5.	Configurar una API para usar Llama3:
-Si planeas conectarlo a una API:
-	•	Crea un archivo app.py con Flask para exponer un endpoint: 
+Conectarlo con API:
+	•	Crear un archivo app.py con Flask para exponer un endpoint: 
  		from flask import Flask, request, jsonify
-import ollama
-
-app = Flask(__name__)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = request.json.get('prompt')
-    response = ollama.completion("llama3", prompt=data)
-    return jsonify(response)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+   
+			import ollama
+			
+			app = Flask(__name__)
+			
+			@app.route('/predict', methods=['POST'])
+			def predict():
+			    data = request.json.get('prompt')
+			    response = ollama.completion("llama3", prompt=data)
+			    return jsonify(response)
+			
+			if __name__ == '__main__':
+			    app.run(host='0.0.0.0', port=5001)
 
 
  4. Arquitectura del Sistema
